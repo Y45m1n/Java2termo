@@ -7,7 +7,7 @@ public class Peixe extends Animais {
 public String getEspeciePeixe() {
     return especiePeixe;
 }
-public void setEspeciePeixe(String especiePeix) {
+public void setEspeciePeixe(String especiePeixe) {
     this.especiePeixe = especiePeixe;
 }
 public String getAgua() {
