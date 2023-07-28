@@ -34,6 +34,9 @@ public class AgendaConsulta extends Animais{
     public String getNomeAgendar() {
         return nomeAgendar;
     }
+    public void setNomeAgendar(String nomeAgendar) {
+        this.nomeAgendar = nomeAgendar;
+    }
     
     
 
