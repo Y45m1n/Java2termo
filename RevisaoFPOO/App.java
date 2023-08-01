@@ -25,6 +25,9 @@ public class App {
                 int contAgenda = 0;
                 int contAnimais = 0;
 
+                JOptionPane.showMessageDialog(null, "Seja Bem-Vindo ao Consultória \n da Dr. Yasmin :) ");
+
+
                 while (aberta) {
                         int acao = Integer.parseInt(JOptionPane.showInputDialog("Escolha uma ação:"
                                         + "\n 1-Cadastrar Animal;"
@@ -39,7 +42,7 @@ public class App {
 
                                 if (acaoCadastro == 1) {
 
-                                        Cachorro[cachorro] = new Cachorro();
+                                        Cachorro[cachorro] = new Cachorro(); // cachorro(da posição cont cachorros)
                                         Cachorro[cachorro].setNome(
                                                         JOptionPane.showInputDialog("Digite o Nome do animal"));
                                         Cachorro[cachorro].setPorte(
@@ -112,19 +115,29 @@ public class App {
 
                         } else if (acao == 2) {
                         Agenda[contAgenda] = new AgendaConsulta();
+
                         Agenda[contAgenda].setNomeAgendar(JOptionPane.showInputDialog("Digite o Nome da (O) proprietária (O)"));
-                        if(Agenda[contAgenda].getNomeAgendar() == animais[contAnimais].getProprietario()){
-                                JOptionPane.showInputDialog("Cliente encontrado, faça o agendamento da sua consulta");
-                
+                               for (int i = 0; i < Agenda[contAgenda].getNomeAgendar().length(); i++) {
+                                for (int j = 0; j < animais[contAnimais].getProprietario().length(); j++) {
+                                      if (animais[contAnimais].getProprietario()  .equals (Agenda[contAgenda].getNomeAgendar())) { 
+                                        JOptionPane.showMessageDialog(null, "Cliente Encontrado");  
+                                }
 
-                       
 
-
-                         }
+                       // if( animais[contAnimais].getProprietario()  .equals (Agenda[contAgenda].getNomeAgendar())){
+                           
+                          //      JOptionPane.showMessageDialog(null, "Cliente encontrado \n" + 
+                           //                     ""  +animais[contAnimais].getProprietario()+ "faça o agendamento da sua consulta");
+                        // } else{
+                                // JOptionPane.showMessageDialog(null, "Cliente não encontrado \n" + 
+                                //                ""  +Agenda[contAgenda].getNomeAgendar()+ "faça o seu cadastro");
+                       //  }
                          
 
                         }
                 }
         }
+}
+}
 }
 

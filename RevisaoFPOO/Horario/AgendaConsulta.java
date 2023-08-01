@@ -10,6 +10,7 @@ public class AgendaConsulta extends Animais{
     String horario;
     String veterinario;
     String nomeAgendar;
+    String agendamento;
 
 
 
@@ -36,6 +37,10 @@ public class AgendaConsulta extends Animais{
     }
     public void setNomeAgendar(String nomeAgendar) {
         this.nomeAgendar = nomeAgendar;
+    }
+    public String getAgendamento() {
+        agendamento = data+horario;
+        return agendamento;
     }
     
     
