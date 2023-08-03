@@ -42,6 +42,10 @@ public class AgendaConsulta extends Animais{
         agendamento = data+horario;
         return agendamento;
     }
+    public AgendaConsulta(String horario, String data) {
+        this.horario = horario;
+        this.data = data;
+    }
     
     
 

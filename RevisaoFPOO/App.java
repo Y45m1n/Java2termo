@@ -16,14 +16,14 @@ public class App {
                 Cobra Cobra[] = new Cobra[10];
                 Peixe Peixe[] = new Peixe[10];
                 AgendaConsulta Agenda[] = new AgendaConsulta[10];
-                Animais animais[] = new Animais[10];
+              //  Animais animais[] = new Animais[10];
 
                 boolean aberta = true;
                 int cachorro = 0; // contador= contCachorro
                 int cobra = 0;
                 int peixe = 0;
                 int contAgenda = 0;
-                int contAnimais = 0;
+              //  int contAnimais = 0;
 
                 JOptionPane.showMessageDialog(null, "Seja Bem-Vindo ao Consultória \n da Dr. Yasmin :) ");
 
@@ -114,30 +114,74 @@ public class App {
                                 }
 
                         } else if (acao == 2) {
-                        Agenda[contAgenda] = new AgendaConsulta();
-
-                        Agenda[contAgenda].setNomeAgendar(JOptionPane.showInputDialog("Digite o Nome da (O) proprietária (O)"));
-                               for (int i = 0; i < Agenda[contAgenda].getNomeAgendar().length(); i++) {
-                                for (int j = 0; j < animais[contAnimais].getProprietario().length(); j++) {
-                                      if (animais[contAnimais].getProprietario()  .equals (Agenda[contAgenda].getNomeAgendar())) { 
-                                        JOptionPane.showMessageDialog(null, "Cliente Encontrado");  
+                                String nomeAgenda = JOptionPane.showInputDialog("Informe o Nome do proprietário");
+                                boolean nomeOk =true;
+                                //comparar nos vetores(gatos/cachorros/outrosanimais)
+                                for (int i = 0; i < cachorro; i++) {
+                                     if(nomeAgenda.equals(Cachorro[i].getNome())){
+                                          JOptionPane.showMessageDialog(null, "Cliente Encontrado");
+                                        nomeOk = true;
+                                        break;
+                                     }
+                                }
+                                  for (int i = 0; i < peixe; i++) {
+                                     if(nomeAgenda.equals(Peixe[i].getNome())){
+                                          JOptionPane.showMessageDialog(null, "Cliente Encontrado");
+                                        nomeOk = true;
+                                        break;
+                                     }
+                                }
+                                  for (int i = 0; i < cobra; i++) {
+                                     if(nomeAgenda.equals(Cobra[i].getNome())){
+                                          JOptionPane.showMessageDialog(null, "Cliente Encontrado");
+                                        nomeOk = true;
+                                        break;
+                                     }
                                 }
 
+                                if (nomeOk) {
+                                      
+                                        boolean registrarAgendamento = true;
+                                        while (registrarAgendamento) {
+                                            
+                                             String dataAgenda = JOptionPane
+                                                       .showInputDialog("Informe a Data do Agendamento\n [dd/mm/yyyy]");
+                                             String horaAgenda = JOptionPane
+                                                       .showInputDialog("Informe a Hora do Agendamento\n [hh:mm]");
+                                             if (contAgenda != 0) {
+                                                  for (int i = 0; i < contAgenda; i++) {
+                                                       if (Agenda[i].getAgendamento().equals(dataAgenda +  horaAgenda)) {
+                                                            // já existe um horário agendado
+                                                            JOptionPane.showMessageDialog(null, "Horario já agendado");
+                                                            break;
+                                                       } else {
+                                                            // 3º realizar agendamento
+                                                            Agenda[contAgenda] = new AgendaConsulta(horaAgenda, dataAgenda);
+                                                              JOptionPane.showMessageDialog(null, "Você fez um agendamento para "+Agenda[i].getAgendamento());
+                                                             
+                                                            contAgenda++;
 
-                       // if( animais[contAnimais].getProprietario()  .equals (Agenda[contAgenda].getNomeAgendar())){
-                           
-                          //      JOptionPane.showMessageDialog(null, "Cliente encontrado \n" + 
-                           //                     ""  +animais[contAnimais].getProprietario()+ "faça o agendamento da sua consulta");
-                        // } else{
-                                // JOptionPane.showMessageDialog(null, "Cliente não encontrado \n" + 
-                                //                ""  +Agenda[contAgenda].getNomeAgendar()+ "faça o seu cadastro");
-                       //  }
+                                                            registrarAgendamento = false;
+                                                            
+                                                       }
+                                                  }
+               
+                                             } else {
+                                                  // 3º realizar agendamento
+                                                  Agenda[contAgenda] = new AgendaConsulta(horaAgenda, dataAgenda);
+                                                  contAgenda++;
+                                                  registrarAgendamento = false;
+                                             }
+                                        }
+                                   }
+                              }
+                         }
+
+        
                          
 
                         }
                 }
-        }
-}
-}
-}
+        
+
 
