@@ -40,9 +40,9 @@ public class ExemploArrayList {
     //escrever 5 números aleatorios- ordenar e imprimir
      ArrayList <Integer> numeros = new ArrayList<>();
      numeros.add(Integer.parseInt(JOptionPane.showInputDialog("Digite um nº")));
-    numeros.add(Integer.parseInt(JOptionPane.showInputDialog("Digite um nº")));
      numeros.add(Integer.parseInt(JOptionPane.showInputDialog("Digite um nº")));
-  numeros.add(Integer.parseInt(JOptionPane.showInputDialog("Digite um nº")));
+     numeros.add(Integer.parseInt(JOptionPane.showInputDialog("Digite um nº")));
+     numeros.add(Integer.parseInt(JOptionPane.showInputDialog("Digite um nº")));
      numeros.add(Integer.parseInt(JOptionPane.showInputDialog("Digite um nº")));
      System.out.println(numeros);
      Collections.sort(numeros);
