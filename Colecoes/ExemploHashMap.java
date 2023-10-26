@@ -2,7 +2,7 @@ package Colecoes;
 
 import java.util.HashMap;
 
-import javax.swing.JOptionPane;
+
 
 public class ExemploHashMap {
     

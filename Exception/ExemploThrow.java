@@ -31,7 +31,7 @@ public class ExemploThrow {
                 throw new Exception("Senha Fraca!!!Usar letras Upper");
             }        
         } catch (Exception e) {
-            // TODO: handle exception
+            
             JOptionPane.showMessageDialog(null, e.getMessage(), "senha", 0);
         }
     }
