@@ -7,15 +7,17 @@ public class Carros {
     private int ano;
     private String cor;
     private String placa;
+    private int preco;
 
     //métodos
     
-    public Carros(String marca, String modelo, int ano, String cor, String placa) {
+    public Carros(String marca, String modelo, int ano, String cor, String placa, int preco) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
         this.cor = cor;
         this.placa = placa;
+        this.preco = preco;
     }
 
     public String getMarca() {
@@ -58,6 +60,15 @@ public class Carros {
         this.placa = placa;
     }
 
+    public int getPreco() {
+        return preco;
+    }
+
+    public void setPreco(int preco) {
+        this.preco = preco;
+    }
+
     
+
     
 }
