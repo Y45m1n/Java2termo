@@ -27,8 +27,8 @@ public class ConnectionFactory {
             if (connection != null) {
                 connection.close();
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao fechar conexão com o banco de dados" + e.getMessage(), e);
         }
     }
 

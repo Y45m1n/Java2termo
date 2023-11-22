@@ -82,6 +82,7 @@ public class VisualCarros extends JPanel {
         jTable = new JTable(tableModel);
 
         jSPane.setViewportView(jTable);
+        jTable.setCellSelectionEnabled(false);
 
         // Criar a Tabela se ela não existir
         new CarrosDAO().criaTabela();
@@ -103,7 +104,6 @@ public class VisualCarros extends JPanel {
                     inputPlaca.setEditable(false);
                     // Desativa o botão
                     cadastrarButton.setEnabled(false);
-                    inputPreco.setText((String) jTable.getValueAt(linhaSelecionada, 3));
                    
                 } else {
                     // Ativa o textfield da placa
@@ -126,6 +126,7 @@ public class VisualCarros extends JPanel {
             inputPreco.setText("");
             inputCor.setText("");
             inputPlaca.setText("");
+            atualizarTabela();
 
         });
         // Configura a ação do botão "Editar" para adicionar um novo registro no banco de dados
@@ -139,6 +140,7 @@ public class VisualCarros extends JPanel {
             inputPreco.setText("");
             inputCor.setText("");
             inputPlaca.setText("");
+            atualizarTabela();
 
         });
         // Configura a ação do botão "Editar" para adicionar um novo registro no banco de dados
