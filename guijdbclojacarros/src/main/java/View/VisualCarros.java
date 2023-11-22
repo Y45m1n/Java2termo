@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.CarrosDAO;
+import Controller.OperacaoCarros;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -87,7 +88,6 @@ public class VisualCarros extends JPanel {
         // atualizar a tabela na abertura da janela
         atualizarTabela();
 
-
         // tratamento de eventos(construtor)
         jTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -97,90 +97,80 @@ public class VisualCarros extends JPanel {
                     inputMarca.setText((String) jTable.getValueAt(linhaSelecionada, 0));
                     inputModelo.setText((String) jTable.getValueAt(linhaSelecionada, 1));
                     inputAno.setText((String) jTable.getValueAt(linhaSelecionada, 2));
-                     inputPreco.setText((String) jTable.getValueAt(linhaSelecionada, 3));
+                    inputPreco.setText((String) jTable.getValueAt(linhaSelecionada, 3));
                      inputCor.setText((String) jTable.getValueAt(linhaSelecionada, 4));
-                    inputPlaca.setText((String) jTable.getValueAt(linhaSelecionada, 5));
-                    
+                    // Desativa o textfield da placa
+                    inputPlaca.setEditable(false);
+                    // Desativa o botão
+                    cadastrarButton.setEnabled(false);
+                    inputPreco.setText((String) jTable.getValueAt(linhaSelecionada, 3));
+                   
+                } else {
+                    // Ativa o textfield da placa
+                    inputPlaca.setEditable(true);
+                    // Ativa o botão
+                    cadastrarButton.setEnabled(true);
                 }
             }
         });
-        VisualCarros operacoes = new VisualCarros();
-        AbstractButton cadastrar;
-        // Configura a ação do botão "cadastrar" para adicionar um novo registro no
-        // banco de dados
-        cadastrarButton.addActionListener(e->{
-                // Chama o método "cadastrar" do objeto operacoes com os valores dos
-                // campos de entrada
-                operacoes.cadastrarButton(inputMarca.getText(), inputModelo.getText(),
-                        inputAno.getText(), inputPreco.getText(), inputCor.getText(), inputPlaca.getText());
-                // Limpa os campos de entrada após a operação de cadastro
-                inputMarca.setText("");
-                inputModelo.setText("");
-                inputAno.setText("");
-                  inputPreco.setText("");
-                 inputCor.setText("");
-                inputPlaca.setText("");
-              
-            });
-              // Configura a ação do botão "Editar" para adicionar um novo registro no
-        // banco de dados
-        apagarButton.addActionListener(e->{
-            // Chama o método "cadastrar" do objeto operacoes com os valores dos
-            // campos de entrada
+        OperacaoCarros operacoes = new OperacaoCarros(carros, tableModel, jTable);
+        // Configura a ação do botão "cadastrar" para adicionar um novo registro no banco de dados
+        cadastrarButton.addActionListener(e -> {
+            // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de entrada
+            operacoes.cadastrar(inputMarca.getText(), inputModelo.getText(),
+                    inputAno.getText(), inputPreco.getText(), inputCor.getText(), inputPlaca.getText());
+            // Limpa os campos de entrada após a operação de cadastro
+            inputMarca.setText("");
+            inputModelo.setText("");
+            inputAno.setText("");
+            inputPreco.setText("");
+            inputCor.setText("");
+            inputPlaca.setText("");
+
+        });
+        // Configura a ação do botão "Editar" para adicionar um novo registro no banco de dados
+        apagarButton.addActionListener(e -> {
+            // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de entrada
             operacoes.apagar(inputPlaca.getText());
             // Limpa os campos de entrada após a operação de cadastro
             inputMarca.setText("");
             inputModelo.setText("");
             inputAno.setText("");
-             inputPreco.setText("");
-              inputCor.setText("");
+            inputPreco.setText("");
+            inputCor.setText("");
             inputPlaca.setText("");
-           
+
         });
-         // Configura a ação do botão "Editar" para adicionar um novo registro no
-        // banco de dados
-        editarButton.addActionListener(e->{
-            // Chama o método "cadastrar" do objeto operacoes com os valores dos
-            // campos de entrada
-            operacoes.atualizar(inputMarca.getText(), inputModelo.getText(),
-                    inputAno.getText(), inputPlaca.getText(), inputPreco.getText());
+        // Configura a ação do botão "Editar" para adicionar um novo registro no banco de dados
+        editarButton.addActionListener(e -> {
+            // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de entrada
+            operacoes.atualizar(inputMarca.getText(), inputModelo.getText(), inputAno.getText(), inputPreco.getText(), inputCor.getText(), inputPlaca.getText());
             // Limpa os campos de entrada após a operação de cadastro
             inputMarca.setText("");
             inputModelo.setText("");
             inputAno.setText("");
-              inputPreco.setText("");
-               inputCor.setText("");
+            inputPreco.setText("");
+            inputCor.setText("");
             inputPlaca.setText("");
-          
+
         });
     }
 
 
-    private void atualizar(String text, String text2, String text3, String text4, String text5) {
-    }
-
-
-    private void cadastrarButton(String text, String text2, String text3, String text4, String text5, String string) {
-    }
-
-
-    private void apagar(String text) {
-    }
-
-
     private void atualizarTabela() {
-        tableModel.setRowCount(0); // Limpa todas as linhas existentes na tabela
-        carros = new CarrosDAO().listarTodos();
-        // Obtém os carros atualizados do banco de dados
-        for (Carros carro : carros) {
-            // Adiciona os dados de cada carro como uma nova linha na tabela Swing
-            tableModel.addRow(new Object[] { carro.getMarca(), carro.getModelo(),
-                    carro.getAno(), carro.getPlaca(), carro.getPreco() });
+        try {
+            tableModel.setRowCount(0); // Limpa todas as linhas existentes na tabela
+            carros = new CarrosDAO().listarTodos();
+            // Obtém os carros atualizados do banco de dados
+            for (Carros carro : carros) {
+                // Adiciona os dados de cada carro como uma nova linha na tabela Swing
+                tableModel.addRow(new Object[] { carro.getMarca(), carro.getModelo(),
+                        carro.getAno(), carro.getCor(), carro.getPreco(), carro.getPlaca() });
+            }
+        } catch (Exception e) {
+            // Adicione mensagens de log ou imprima o stack trace para identificar problemas
+            e.printStackTrace();
         }
     }
-
- 
-
-   
 
 }

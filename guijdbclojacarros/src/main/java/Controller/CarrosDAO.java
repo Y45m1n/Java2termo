@@ -23,16 +23,24 @@ public class CarrosDAO {
 
     // criar Tabela
     public void criaTabela() {
-        String sql = "CREATE TABLE IF NOT EXISTS carros_lojacarros (MARCA VARCHAR(255),MODELO VARCHAR(255),ANO VARCHAR(255),PRECO VARCHAR(255), COR VARCHAR(255), PLACA VARCHAR(255) PRIMARY KEY, )";
+        String sql = "CREATE TABLE IF NOT EXISTS carros_lojacarros (" +
+                "MARCA VARCHAR(255)," +
+                "MODELO VARCHAR(255)," +
+                "ANO VARCHAR(255)," +
+                "PRECO VARCHAR(255)," +
+                "COR VARCHAR (255)," +
+                "PLACA VARCHAR(255) PRIMARY KEY)";
         try (Statement stmt = this.connection.createStatement()) {
             stmt.execute(sql);
             System.out.println("Tabela criada com sucesso.");
+    
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao criar a tabela: " + e.getMessage(), e);
         } finally {
             ConnectionFactory.closeConnection(this.connection);
         }
     }
+    
 
     // Listar todos os valores cadastrados
     public List<Carros> listarTodos() {
@@ -51,7 +59,7 @@ public class CarrosDAO {
                 // Para cada registro no ResultSet, cria um objeto Carros com os valores do
                 // registro
 
-                Carros carro = new Carros(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"), rs.getString("Preço"), rs.getString("cor"), rs.getString("placa"));
+                Carros carro = new Carros(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"), rs.getString("Preco"), rs.getString("cor"), rs.getString("placa"));
                 carros.add(carro); // Adiciona o objeto Carros à lista de carros
             }
         } catch (SQLException ex) {
@@ -116,7 +124,7 @@ PreparedStatement stmt = null;
 String sql = "DELETE FROM carros_lojacarros WHERE placa = ?";
 try {
 stmt = connection.prepareStatement(sql);
-stmt.setString(1, placa);
+stmt.setString(6, placa);
 stmt.executeUpdate(); // Executa a instrução SQL
 System.out.println("Dado apagado com sucesso");
 } catch (SQLException e) {
